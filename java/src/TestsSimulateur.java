@@ -94,8 +94,15 @@ public class TestsSimulateur {
         assertTrue("mettreEnMaintenance doit réussir", piste.mettreEnMaintenance());
         assertEquals("statut MAINTENANCE", StatutPiste.MAINTENANCE, piste.getStatut());
         assertFalse("non disponible en maintenance", piste.estDisponible());
+        // Ne peut pas remettre en maintenance si déjà en maintenance
+        assertFalse("mettreEnMaintenance échoue si déjà en maintenance", piste.mettreEnMaintenance());
         assertTrue("sortirDeMaintenance", piste.sortirDeMaintenance());
         assertTrue("disponible après maintenance", piste.estDisponible());
+
+        // Ne peut pas mettre en maintenance si occupée
+        piste.occuper(new Avion("XX1", "Test"));
+        assertFalse("mettreEnMaintenance échoue si occupée", piste.mettreEnMaintenance());
+        piste.liberer();
 
         System.out.println("OK Test piste réussi\n");
     }

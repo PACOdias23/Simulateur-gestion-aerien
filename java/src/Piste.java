@@ -101,7 +101,7 @@ public class Piste {
      * @return true si la transition a réussi
      */
     public boolean mettreEnMaintenance() {
-        if (avionActuel == null) {
+        if (estDisponible()) {
             this.statut = StatutPiste.MAINTENANCE;
             return true;
         }
