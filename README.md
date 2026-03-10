@@ -13,16 +13,34 @@ Ce projet simule le contrôle du trafic aérien d'un aéroport en gérant:
 ## 🚀 Démarrage Rapide
 
 ### Prérequis
-- Python 3.6 ou supérieur
+- Python 3.6+ **ou** Java 11+
 
-### Installation
+### Version Python
+
 ```bash
 # Cloner le dépôt
 git clone https://github.com/PACOdias23/Simulateur-gestion-aerien.git
 cd Simulateur-gestion-aerien
 
 # Exécuter le simulateur
-python simulateur.py
+python3 simulateur.py
+
+# Tests
+python3 tests.py
+```
+
+### Version Java
+
+```bash
+# Depuis la racine du projet
+cd java
+./run.sh           # Lance le simulateur
+./run.sh tests     # Exécute les tests unitaires
+
+# Ou manuellement :
+javac -d out src/*.java
+java -cp out Simulateur
+java -cp out TestsSimulateur
 ```
 
 ### Utilisation
@@ -37,10 +55,22 @@ Le programme propose 3 modes:
 
 ```
 Simulateur-gestion-aerien/
-├── avion.py           # Classe Avion et états possibles
-├── piste.py           # Classe Piste et gestion de disponibilité
-├── aeroport.py        # Classe Aéroport - cœur du système
-├── simulateur.py      # Programme principal avec démonstrations
+├── avion.py           # Classe Avion et états possibles (Python)
+├── piste.py           # Classe Piste et gestion de disponibilité (Python)
+├── aeroport.py        # Classe Aéroport - cœur du système (Python)
+├── simulateur.py      # Programme principal avec démonstrations (Python)
+├── tests.py           # Tests automatisés (Python)
+├── exemples.py        # Exemples d'utilisation de l'API (Python)
+├── java/              # Version Java du simulateur
+│   ├── src/
+│   │   ├── StatutAvion.java       # Enum états avion
+│   │   ├── Avion.java             # Classe Avion
+│   │   ├── StatutPiste.java       # Enum états piste
+│   │   ├── Piste.java             # Classe Piste
+│   │   ├── Aeroport.java          # Contrôle aérien
+│   │   ├── Simulateur.java        # Programme principal + CLI
+│   │   └── TestsSimulateur.java   # Tests unitaires
+│   └── run.sh         # Script de compilation/lancement
 ├── DOCUMENTATION.md   # Documentation technique détaillée
 └── README.md          # Ce fichier
 ```
@@ -102,25 +132,33 @@ Ce projet est idéal pour apprendre:
 
 ## 🔧 Exemple d'Utilisation
 
+### Python
+
 ```python
 from aeroport import Aeroport
 from avion import Avion
 
-# Créer un aéroport avec 3 pistes
 aeroport = Aeroport("Charles de Gaulle", nombre_pistes=3)
 
-# Ajouter un avion en approche
 avion = Avion("AF123", "Air France")
 aeroport.ajouter_avion_en_approche(avion)
-
-# Autoriser l'atterrissage
 aeroport.autoriser_atterrissage()
-
-# Finaliser l'atterrissage
 aeroport.finaliser_atterrissage("AF123")
 
-# Afficher l'état
 aeroport.afficher_etat()
+```
+
+### Java
+
+```java
+Aeroport aeroport = new Aeroport("Charles de Gaulle", 3);
+
+Avion avion = new Avion("AF123", "Air France");
+aeroport.ajouterAvionEnApproche(avion);
+aeroport.autoriserAtterrissage();
+aeroport.finaliserAtterrissage("AF123");
+
+aeroport.afficherEtat();
 ```
 
 ## 🌟 Fonctionnalités

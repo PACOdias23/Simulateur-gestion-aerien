@@ -38,3 +38,7 @@ env/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Java compiled output
+java/out/
+*.class
